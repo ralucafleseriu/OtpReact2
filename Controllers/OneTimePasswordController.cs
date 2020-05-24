@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OtpReact.Models;
 using OtpReact.Services;
 
@@ -24,7 +21,7 @@ namespace OtpReact.Controllers
         public async Task<OneTimePassword> Get()
         {
             var userId = Guid.NewGuid();
-            var dateTime = DateTime.Now;
+            var dateTime = DateTime.UtcNow;
             var password = await _oneTimePasswordService.GenerateNewOneTimePassword(userId, dateTime);
             return await Task.FromResult(password);
         }
